@@ -39,6 +39,17 @@ img{
   padding: 5px;
   margin-left: 10%;
 }
+.surveyForm{
+  border: 2px outset rgb(197, 194, 194);
+  padding: .857em;
+  background-color: rgb(253, 251, 251);
+  max-width: 70%;
+  margin: auto;
+  
+ }
+ .surveySubmitButton{
+  margin:auto;
+ }
 #AdminSurvey{
   color:#fff;
   font-size: 11px;

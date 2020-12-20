@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import AdminNav from './AdminNav';
-class AdminTable extends Component {
+import AdminTable  from './AdminTable1';
+class AdminTables extends Component {
     state = {  }
     render() { 
         return ( <div>
             <AdminNav />
-            Hey
+            <AdminTable />
         </div> );
     }
 }
  
-export default AdminTable;
+export default AdminTables;
