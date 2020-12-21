@@ -8,10 +8,10 @@ class AdminNav extends Component {
     render() { 
         return ( <AppBar position="static">
         <Toolbar>
-            <div class="col-md-9">
+            <div className="col-md-9">
                 <h3 id="navlogo">TekSystems Covid Survey</h3>
             </div>
-            <div class="col-md-3">
+            <div className="col-md-3">
             <Link to="/admintable"><Button id="AdminSurvey" color="inherit">Survey Table</Button></Link> 
             <Link to="/"><Button id="logout" color="inherit">Logout</Button></Link> 
             </div>

@@ -44,6 +44,9 @@ class Login extends Component {
   }
   render() {
     const emailRegex = new RegExp('/\S+@\S+\.\S+/');
+    const disabled = this.state.email.length>2 && this.state.password.length>2?false:true;
+    const email_length = this.state.email.length<2?true:false;
+    const password_length = this.state.password.length<2?true:false;
     const passwordRegex = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}');
     return (
       <div className="background">
@@ -63,7 +66,9 @@ class Login extends Component {
                     label="Email "
                     name="email"
                     required
-                    onChange={this.myemailChangeHandler} />
+                    onChange={this.myemailChangeHandler}
+                    validations={{matchRegexp:emailRegex}} 
+                    error={email_length} />
                   <br />
                   <TextField id="standard-basic2" margin="normal"
                     required
@@ -72,9 +77,15 @@ class Login extends Component {
                     label="Password"
                     name="password"
                     required
+                    error={password_length}
                     onChange={this.myChangepasswordHandler} />
                   <br />
-                  <Button type="submit" variant="contained" id="submit" color="primary" >
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    id="submit"
+                    disabled={disabled}
+                    color="primary" >
                     Submit
                                 </Button>
                 </form>

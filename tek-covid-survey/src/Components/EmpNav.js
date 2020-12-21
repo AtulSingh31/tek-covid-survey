@@ -9,10 +9,10 @@ class EmpNav extends Component {
         return (
             <AppBar position="static">
                 <Toolbar>
-                    <div class="col-md-9">
+                    <div className="col-md-9">
                         <h3 id="navlogo">TekSystems Covid Survey</h3>
                     </div>
-                    <div class="col-md-3">
+                    <div className="col-md-3">
                     <Link to="/empsurvey"><Button id="Survey" color="inherit">Survey</Button></Link> 
                     <Link to="/empguidelines"><Button id="Guidelines" color="inherit">Guidelines</Button></Link> 
                     <Link to="/"><Button id="logout" color="inherit">Logout</Button></Link> 
