@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.covid19.Survey.Model.Login;
 import com.covid19.Survey.Model.Survey;
 
 
@@ -31,4 +32,21 @@ public class Controller {
 		return true;
 		
 	}
+	@PostMapping()
+	@RequestMapping({ "/emplogin" })
+    public boolean emplogin( @RequestBody Login user) {
+		
+    	if(user.getEmail().equals("abcd")&&user.getPassword().equals("abcd"))
+    		return true;
+    	return false;
+    }
+	@PostMapping()
+	@RequestMapping({ "/adminlogin" })
+    public boolean adminlogin( @RequestBody Login user) {
+		
+    	if(user.getEmail().equals("xyz")&&user.getPassword().equals("xyz"))
+    		return true;
+    	return false;
+    }
+	
 }

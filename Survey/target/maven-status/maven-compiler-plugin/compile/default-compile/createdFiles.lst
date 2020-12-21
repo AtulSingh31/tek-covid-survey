@@ -1,1 +1,5 @@
+com\covid19\Survey\Model\DiseaseType.class
+com\covid19\Survey\Config\Config.class
+com\covid19\Survey\Model\Survey.class
 com\covid19\Survey\SurveyApplication.class
+com\covid19\Survey\Controller\Controller.class
