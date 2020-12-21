@@ -2,12 +2,20 @@ import React, { Component } from "react";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import tekbackground from '../tekbackground.jpg';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+
 import axios from 'axios';
 class Login extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    open:false
   };
+  loginform={
+    email:'',
+    password:''
+  }
 
   myemailChangeHandler = (event) => {
     this.setState({ email: event.target.value });
@@ -17,18 +25,24 @@ class Login extends Component {
   }
   submitHandler = e => {
     e.preventDefault()
-    console.log(this.state)
+      this.loginform.email=this.state.email;
+      this.loginform.password=this.state.password;
+    console.log(this.loginform)
 
-    axios.post('http://localhost:8080/api/emplogin', this.state)
+    axios.post('http://localhost:8080/api/emplogin', this.loginform)
       .then(response => {
         if (response.data === true) {
           this.props.history.push("/empsurvey");
         }
         else {
-          axios.post('http://localhost:8080/api/adminlogin', this.state)
+          axios.post('http://localhost:8080/api/adminlogin', this.loginform)
             .then(response => {
               if (response.data === true) {
                 this.props.history.push("/admintables");
+              }
+              else{
+                this.setState({ open: true});
+                console.log(this.state.open)
               }
             })
             .catch(error => {
@@ -42,12 +56,16 @@ class Login extends Component {
 
 
   }
+  handleClose = () => this.setState({ open: false })
   render() {
-    const emailRegex = new RegExp('/\S+@\S+\.\S+/');
-    const disabled = this.state.email.length>2 && this.state.password.length>2?false:true;
-    const email_length = this.state.email.length<2?true:false;
-    const password_length = this.state.password.length<2?true:false;
+    const emailRegex = new RegExp('^\w{5,}$');
+    const email_length = this.state.email.length > 2 || this.state.email.length == 0 ? false : true;
+    const password_length = this.state.password.length < 2 ? true : false;
     const passwordRegex = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}');
+    
+
+    const disabled = this.state.email.length > 2 && this.state.password.match(passwordRegex) ? false : true;
+    const regex = this.state.password.match(passwordRegex) || this.state.password.length == 0 ? false : true;
     return (
       <div className="background">
         <div className="container">
@@ -63,11 +81,11 @@ class Login extends Component {
                     margin="normal"
                     required
                     fullWidth
-                    label="Email "
+                    label="Username"
                     name="email"
                     required
                     onChange={this.myemailChangeHandler}
-                    validations={{matchRegexp:emailRegex}} 
+                    validations={{ matchRegexp: emailRegex }}
                     error={email_length} />
                   <br />
                   <TextField id="standard-basic2" margin="normal"
@@ -77,7 +95,7 @@ class Login extends Component {
                     label="Password"
                     name="password"
                     required
-                    error={password_length}
+                    error={regex}
                     onChange={this.myChangepasswordHandler} />
                   <br />
                   <Button
@@ -93,6 +111,19 @@ class Login extends Component {
             </div>
           </div>
         </div>
+        <Snackbar
+        open={this.state.open}
+        autoHideDuration={2000}
+        onClose={this.handleClose}
+        message="Incorrect Username or Password"
+        action={
+          <React.Fragment>
+            <Button color="secondary" size="small" onClick={this.handleClose}>
+              Retry
+            </Button>
+          </React.Fragment>
+        }
+      />
       </div>
     );
   }
