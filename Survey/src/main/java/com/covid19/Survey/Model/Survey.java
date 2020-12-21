@@ -1,13 +1,27 @@
 package com.covid19.Survey.Model;
 
-public class Survey {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+@Entity
+public class Survey {
+	 	@Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "Id")
+	    private int Id;
 		private String q1;
 		private String q2;
 		private String q3;
 		private String q4;
 		private String q5;
 		private String q6;
+		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 		private DiseaseType q7;
 		
 		public String getQ1() {

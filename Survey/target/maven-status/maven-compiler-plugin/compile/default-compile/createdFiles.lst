@@ -1,5 +1,9 @@
-com\covid19\Survey\Model\DiseaseType.class
+com\covid19\Survey\Service\service.class
 com\covid19\Survey\Config\Config.class
 com\covid19\Survey\Model\Survey.class
 com\covid19\Survey\SurveyApplication.class
+com\covid19\Survey\DAO\Dao.class
+com\covid19\Survey\Model\DiseaseType.class
+com\covid19\Survey\Model\Login.class
 com\covid19\Survey\Controller\Controller.class
+com\covid19\Survey\Model\User.class
