@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Field, reduxForm,formValueSelector } from "redux-form";
+import { Field, reduxForm,formValueSelector,initialize,reset } from "redux-form";
 import {Control, LocalForm, Errors} from 'react-redux-form'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -20,12 +20,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import {postSurvey} from '../reducers/ActionCreators'
-const questions_array=["Mode of Transportation"];
+import Snackbar from '@material-ui/core/Snackbar'
+
 var selectordisease={
     diabetes:false,
     asthma:false,
     bloodPressure:false,
-    None:false
+    none:false
 }
 const mapDispatchToProps = (dispatch)=>({
   postSurvey:(q1,q2,q3,q4,q5,q6,q7) =>
@@ -33,26 +34,29 @@ const mapDispatchToProps = (dispatch)=>({
 )
 })
 
-const state = { selected: "credit" };
- const handleRadioChange = ev => {
-   console.log("radio button was hit")
-  state.selected = ev.target.value ;
-};
 
 
-const handleChange = (event) => {
+const handleDChange = (event) => {
     console.log(selectordisease)
-    
-    
+   
+      
     selectordisease[event.target.name]=!selectordisease[event.target.name] ;
-  };
+    };
+  
+
+
+
+
+
+
+ 
 const Q1 = ({ input, meta: { touched, error },...rest }) => (
-    
+
         
 <FormControl>
-    <FormLabel component="legend"><span style={{ fontSize: '1.5rem' }}>  Mode of Transportation</span></FormLabel>
-      <RadioGroup {...input} {...rest} onChange={handleRadioChange} value={state}>
-        <FormControlLabel value="1" control={<Radio />} label="Public transport" />
+    <FormLabel component="fieldset"><span style={{ fontSize: '1.5rem' }}>  Mode of Transportation</span></FormLabel>
+      <RadioGroup {...input} {...rest} >
+        <FormControlLabel value="1" control={<Radio  />} label="Public transport" />
         <FormControlLabel value="4" control={<Radio />} label="Private transport" />
         <FormControlLabel value="2" control={<Radio />} label="Taxi" />
         {touched && error && (
@@ -69,7 +73,7 @@ const Q1 = ({ input, meta: { touched, error },...rest }) => (
         
     <FormControl>
         <FormLabel component="legend"><span style={{ fontSize: '1.5rem' }}>  Where do you usually have your lunch?</span></FormLabel>
-          <RadioGroup {...input} {...rest}>
+          <RadioGroup {...input} {...rest} >
             <FormControlLabel value="1" control={<Radio />} label="Restaurant or Some Other External Place"/>
             <FormControlLabel value="2" control={<Radio />} label="Office Canteen." />
             <FormControlLabel value="4" control={<Radio />} label="Bring your own food." />
@@ -83,7 +87,7 @@ const Q1 = ({ input, meta: { touched, error },...rest }) => (
         
         <FormControl>
             <FormLabel component="legend"><span style={{ fontSize: '1.5rem' }}>  Number of cases in 500m of your house</span></FormLabel>
-              <RadioGroup {...input} {...rest}>
+              <RadioGroup {...input} {...rest} >
                 <FormControlLabel value="4" control={<Radio />} label="Less than 5" />
                 <FormControlLabel value="3" control={<Radio />} label="Between 5 - 10" />
                 <FormControlLabel value="2" control={<Radio />} label="Between 10 - 20" />
@@ -99,7 +103,7 @@ const Q1 = ({ input, meta: { touched, error },...rest }) => (
         
         <FormControl>
             <FormLabel component="legend"><span style={{ fontSize: '1.5rem' }}>  Have you or any of your family member been tested positive for Covid 19?</span></FormLabel>
-              <RadioGroup {...input} {...rest}>
+              <RadioGroup {...input} {...rest} > 
                 <FormControlLabel value="4" control={<Radio />} label="Yes" />
                 <FormControlLabel value="1" control={<Radio />} label="No" />
                 
@@ -148,21 +152,23 @@ const Q1 = ({ input, meta: { touched, error },...rest }) => (
           <FormGroup {...input} {...rest}>
             <FormControlLabel 
              
-              control={<Checkbox  name="diabetes" 
-                onChange={handleChange}
+              control={<Checkbox  name="diabetes"
+                id="diabetes" 
+                onChange={handleDChange}
+                
               />}
               label="Diabetes" 
             />
             <FormControlLabel 
-              control={<Checkbox  name="asthma" onChange={handleChange} />}
+              control={<Checkbox  name="asthma" id="asthma"  onChange={handleDChange} />}
               label="Asthma"
             />
             <FormControlLabel
-              control={<Checkbox name="bloodPressure" onChange={handleChange} />}
+              control={<Checkbox value=""name="bloodPressure" id="bloodPressure"  onChange={handleDChange} />}
               label="Blood Pressure"
             />
             <FormControlLabel
-              control={<Checkbox name="None" onChange={handleChange} />}
+              control={<Checkbox name="none" id="none"  onChange={handleDChange} />}
               label="None"
             />
           </FormGroup>
@@ -174,18 +180,25 @@ const Q1 = ({ input, meta: { touched, error },...rest }) => (
     
   
 
+ 
 
 class SurveyForm extends Component{
  
     constructor(props){
         super(props);
-    
-    this.handleSubmit=this.handleSubmit.bind(this)
+        this.state = {
+          open: false
+        }
+       
+    this.handleClose=this.handleClose.bind(this)
     }
+handleClose = () => this.setState({ open: false })
+
  
 handleSubmit(values){
     alert(JSON.stringify(values))
 }
+
 
 render(){
     const { handleSubmit, reset, pristine, submitting, valid } = this.props;
@@ -196,9 +209,14 @@ render(){
         <hr/>
         
         <form  className="surveyForm" onSubmit={handleSubmit(values =>{ 
+            
             values.q7=selectordisease
             console.log(values);
-            this.props.postSurvey(values.q1,values.q2,values.q3,values.q4,values.q5,values.q6,values.q7)
+
+            this.props.postSurvey(values.q1,values.q2,values.q3,values.q4,values.q5,values.q6,values.q7);
+            this.setState({
+              open:true
+            })
         })}>   
         <div>
         <List>
@@ -228,26 +246,50 @@ render(){
           </ListItemText></ListItem>
           <ListItem divider={true}>
           <ListItemText>
-          <Field  name="q7" component={Q7}>
+          <Field  name="q7" component={Q7} >
           
           </Field>
           </ListItemText></ListItem></List>
       </div> 
       <div style={{textAlign:"center"}}>
-        <Button   type="submit" variant="contained" color="primary" disabled={!valid || pristine || submitting}>Submit</Button>
+        <Button   type="submit" variant="contained" disabled={!valid || pristine || submitting} color="primary" >Submit</Button>
         </div>
         </form>
+        <Snackbar
+        open={this.state.open}
+        autoHideDuration={2000}
+        onClose={() => { this.setState({
+          open:false
+        })}}
+        message="Submit successful"
+        action={
+          <React.Fragment>
+            <Button color="secondary" size="small" onClick={() => { this.setState({
+              open:false
+            })}}>
+              OK!
+            </Button>
+          </React.Fragment>
+        }
+      />
         </div>
     )
 }
 }
+
+
 const selector = formValueSelector('SurveyForm')
-SurveyForm=connect(
+SurveyForm=connect(undefined,
   mapDispatchToProps
 )(SurveyForm)
-export default 
-  
-        reduxForm({
+export default reduxForm({
     form: 'SurveyForm',
-    validate: validators
+    validate: validators,
+    onSubmitSuccess: (result,dispatch) => {
+      dispatch(reset('SurveyForm'));
+
+
+    //  console.log("Submit success"+this.form.values)
+      
+    }
   })(SurveyForm)
