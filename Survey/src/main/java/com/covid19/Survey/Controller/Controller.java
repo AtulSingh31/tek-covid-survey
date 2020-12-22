@@ -2,12 +2,14 @@ package com.covid19.Survey.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +37,19 @@ public class Controller {
 		
 		
 	}
+	/* @GetMapping(value="getGuidelines/{id}")
+	    public List<String> getGuidelines(@PathVariable("id") String Id){
+	        List<String> tlist= new ArrayList<String>();
+	        tlist.add("Stay inside house");
+	        tlist.add("Do not interact with outsiders or unknown people");
+	        return tlist;
+	       
+	    }*/
+	 @GetMapping(value="getGuidelines/{id}")
+	    public List<String> getGuidelines(@PathVariable("id") String Id){
+	        return serv.getGuidelines(Integer.parseInt(Id));
+	       
+	    }
 	@PostMapping()
 	@RequestMapping({ "/emplogin" })
     public boolean emplogin( @RequestBody Login user) {
@@ -47,5 +62,8 @@ public class Controller {
 		
     	return serv.adminlogin(user);
     }
-	
+	@GetMapping("/user")
+    public List<String> getJobData(){
+        return serv.getEmploee();
+    }
 }

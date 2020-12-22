@@ -1,5 +1,7 @@
 package com.covid19.Survey.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,4 +26,10 @@ public class service {
 	 public boolean adminlogin(  Login user) {
 		 return dao.adminlogin(user);
 	 }
+	 public List<String> getEmploee(){
+	        return dao.getEmployeeDetails();
+	    }
+	 public List<String> getGuidelines(int id){
+	        return dao.getGuidelines(id);
+	    }
 }

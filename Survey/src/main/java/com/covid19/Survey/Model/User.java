@@ -1,12 +1,16 @@
 package com.covid19.Survey.Model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -18,7 +22,16 @@ public class User {
 	 	private String username;
 	 	private String password;
 	 	private String userRole;
-	 	
+	 	@ElementCollection
+	 	private List<String> guidelines;
+        
+	       
+        public List<String> getGuidelines() {
+            return guidelines;
+        }
+        public void setGuidelines(List<String> guidelines) {
+            this.guidelines = guidelines;
+        }
 		public String getUserRole() {
 			return userRole;
 		}
