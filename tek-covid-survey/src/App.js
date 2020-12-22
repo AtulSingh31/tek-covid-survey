@@ -6,6 +6,7 @@ import AdminNav from './Components/AdminNav';
 import EmpSurvey from './Components/EmpSurvey';
 import EmpGuidelines from './Components/EmpGuidelines';
 import AdminTables from './Components/AdminTable';
+import AdminGuidelines from './Components/AdminGuidelines';
 function App() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/empguidelines" component={EmpGuidelines} />
         <Route path="/adminnav" component={AdminNav} />
         <Route path="/admintables" component={AdminTables} />
+        <Route path="/adminguidelines" component={AdminGuidelines} />
       </div>
     </Router>
   );

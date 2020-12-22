@@ -10,6 +10,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
 
 class AdminTable extends Component{
     constructor(){
@@ -32,7 +34,7 @@ class AdminTable extends Component{
     
 
     componentDidMount(){
-        fetch("http://localhost:8080/api/admin")
+        fetch("http://localhost:8080/api/user")
         .then(response => response.json())
         .then(data => {
             this.setState({
@@ -65,7 +67,7 @@ class AdminTable extends Component{
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell style={headerStyles}>S.No.</TableCell>
+                                {/* <TableCell style={headerStyles}>S.No.</TableCell> */}
                                 <TableCell style={headerStyles}>Employee Name</TableCell>
                                 <TableCell style={headerStyles}>Question&nbsp;1</TableCell>
                                 <TableCell style={headerStyles}>Question&nbsp;2</TableCell>
@@ -80,19 +82,20 @@ class AdminTable extends Component{
 
                         <TableBody>
                             {tableData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                                <TableRow key={row.id}>
-                                    <TableCell style={bodyStyles}>{row.id}</TableCell>
-                                    <TableCell style={bodyStyles}>{row.name}</TableCell>
-                                    <TableCell style={bodyStyles}>{row.question1}</TableCell>
-                                    <TableCell style={bodyStyles}>{row.question2}</TableCell>
-                                    <TableCell style={bodyStyles}>{row.question3}</TableCell>
-                                    <TableCell style={bodyStyles}>{row.question4}</TableCell>
-                                    <TableCell style={bodyStyles}>{row.question5}</TableCell>
-                                    <TableCell style={bodyStyles}>{row.question6}</TableCell>
-                                    <TableCell style={bodyStyles}>{row.question7}</TableCell>
+                                <TableRow >
+                                    {/* <TableCell style={bodyStyles}>{row.id}</TableCell> */}
+                                    <TableCell style={bodyStyles}>{tableData[0]}</TableCell>
+                                    <TableCell style={bodyStyles}>{tableData[1]}</TableCell>
+                                    <TableCell style={bodyStyles}>{tableData[2]}</TableCell>
+                                    <TableCell style={bodyStyles}>{tableData[3]}</TableCell>
+                                    <TableCell style={bodyStyles}>{tableData[4]}</TableCell>
+                                    <TableCell style={bodyStyles}>{tableData[5]}</TableCell>
+                                    <TableCell style={bodyStyles}>{tableData[6]}</TableCell>
+                                    <TableCell style={bodyStyles}>{tableData[7]}</TableCell>
                                     <TableCell>
-                                        <button 
-                                        className="button">Show</button>
+                                    <Link to="/adminguidelines">
+                                        <button className="button">Show</button>
+                                    </Link>
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -110,7 +113,7 @@ class AdminTable extends Component{
                                 onChangeRowsPerPage={this.handleChangeRowsPerPage}
                             />
                         </TableRow>
-                    </TableFooter>
+                   </TableFooter>
                 </TableContainer>
                 
             </form>

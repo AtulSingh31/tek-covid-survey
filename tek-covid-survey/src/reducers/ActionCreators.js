@@ -37,5 +37,5 @@ export const postSurvey = (q1,q2,q3,q4,q5,q6,q7)=>(dispatch)=>{
       })
     .then(response => response.json())
     .then(response => dispatch(addSurvey(response)))
-    .catch(error =>  { console.log('post Survey', error.message); alert('Your Survey could not be posted\nError: '+error.message); });
+    .catch(error =>  { console.log('post Survey', error.message); });
 };

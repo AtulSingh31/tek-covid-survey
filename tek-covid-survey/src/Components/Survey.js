@@ -167,10 +167,7 @@ const Q1 = ({ input, meta: { touched, error },...rest }) => (
               control={<Checkbox value=""name="bloodPressure" id="bloodPressure"  onChange={handleDChange} />}
               label="Blood Pressure"
             />
-            <FormControlLabel
-              control={<Checkbox name="none" id="none"  onChange={handleDChange} />}
-              label="None"
-            />
+            
           </FormGroup>
           
         </FormControl>
@@ -204,7 +201,7 @@ render(){
     const { handleSubmit, reset, pristine, submitting, valid } = this.props;
     return(
         <div>
-        <Typography><h3>Covid-19 Employee Survey</h3></Typography>
+        <Typography><h3 id="surveypage">Covid-19 Employee Survey</h3></Typography>
       
         <hr/>
         
@@ -287,7 +284,7 @@ export default reduxForm({
     validate: validators,
     onSubmitSuccess: (result,dispatch) => {
       dispatch(reset('SurveyForm'));
-
+      window.location.reload();
 
     //  console.log("Submit success"+this.form.values)
       

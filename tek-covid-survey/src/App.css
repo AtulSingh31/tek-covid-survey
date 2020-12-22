@@ -99,6 +99,14 @@ img{
   font-size: calc(14px + 2vmin);
   color: white;
 }
+#surveypage{
+  align-items: center;
+  display: flex;
+  margin-left:38%;
+}
+html{
+  font-size:14px !important;
+}
 #guidelineContainer{
   align-items: center;
   display: flex;
