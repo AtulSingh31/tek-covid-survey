@@ -19,9 +19,7 @@ export const validators = values=>
     if(!values.q6){
         errors.q6="Please answer this question!"
     }
-    if(!values.q7){
-        errors.q7="Please answer this question!"
-    }
+    
     console.log(errors);
     return errors;
 }

@@ -88,6 +88,7 @@ img{
   border-radius: 10px;
   text-align: center;
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -98,7 +99,35 @@ img{
   font-size: calc(14px + 2vmin);
   color: white;
 }
-
+#surveypage{
+  align-items: center;
+  display: flex;
+  margin-left:38%;
+}
+html{
+  font-size:14px !important;
+}
+#guidelineContainer{
+  align-items: center;
+  display: flex;
+}
+#gl{
+  padding:2%;
+}
+#guidelineH1{
+  margin-left: 35%;
+}
+#guidelines{
+  align-items: center;
+  margin-left: 5%;
+  margin-right:5%;
+  margin-top: 5%;
+  padding:2%;
+  border: #222 solid 2px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
+}
 .App-link {
   color: #61dafb;
 }

@@ -113,7 +113,7 @@ class AdminTable extends Component{
                                 onChangeRowsPerPage={this.handleChangeRowsPerPage}
                             />
                         </TableRow>
-                    </TableFooter>
+                   </TableFooter>
                 </TableContainer>
                 
             </form>

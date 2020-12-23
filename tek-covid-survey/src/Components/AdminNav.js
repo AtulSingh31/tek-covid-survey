@@ -12,7 +12,7 @@ class AdminNav extends Component {
                 <h3 id="navlogo">TekSystems Covid Survey</h3>
             </div>
             <div className="col-md-3">
-            <Link to="/admintable"><Button id="AdminSurvey" color="inherit">Survey Table</Button></Link> 
+            <Link to="/admintables"><Button id="AdminSurvey" color="inherit">Survey Table</Button></Link> 
             <Link to="/"><Button id="logout" color="inherit">Logout</Button></Link> 
             </div>
         </Toolbar>
